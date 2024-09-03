@@ -1,8 +1,24 @@
+"use client";
 import { Button } from "@/components/ui/button";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import React from "react";
+import React, { use, useEffect } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
+  const { data } = useSession();
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   return (
     <div className="p-5 shadow-sm flex justify-between">
       <div className="flex items-center gap-8 ">
@@ -20,7 +36,29 @@ const Header = () => {
         </div>
       </div>
       <div>
-        <Button>Get Started</Button>
+        {data?.user ? (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Image
+                src={data?.user?.image}
+                alt="User"
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>My Booking</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => signOut()}>
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ) : (
+          <Button onClick={() => signIn("descope")}>Login / Sign Up</Button>
+        )}
       </div>
     </div>
   );
