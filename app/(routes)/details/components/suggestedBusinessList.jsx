@@ -45,6 +45,7 @@ const SuggestedBusinessList = ({ business }) => {
                   height={80}
                   className="rounded-lg object-cover h-[100px]"
                 />
+                {/*oo*/}
                 <div>
                   <h2 className="font-bold">{business.name}</h2>
                   <h2 className="text-primary">{business.contactPerson}</h2>
