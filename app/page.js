@@ -1,11 +1,11 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Hero from "./components/Hero";
-import CategoryList from "./components/CategoryList";
+import Hero from "@/components/Hero";
+import CategoryList from "@/components/CategoryList";
 import GlobalApi from "./services/GlobalApi";
 import { useEffect, useState } from "react";
-import BusinessList from "./components/BusinessList";
+import BusinessList from "@/components/BusinessList";
 
 export default function Home() {
   const [categoryList, setCategoryList] = useState([]);

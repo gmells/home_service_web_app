@@ -24,10 +24,11 @@ function BookingHistoryList({ bookingHistory, type }) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       {bookingHistory.map((booking, index) => (
         <div
+          key={index}
           className="border 
           rounded-lg p-4 mb-5"
         >
-          <div key={index} className="flex gap-4 ">
+          <div className="flex gap-4 ">
             {booking?.businessList?.name && (
               <Image
                 src={booking?.businessList?.image[0]?.url}

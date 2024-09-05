@@ -1,26 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import BookingHistoryList from "./components/BookingHistoryList";
+import BookingHistoryList from "@/components/BookingHistoryList";
 import GlobalApi from "@/app/services/GlobalApi";
 import { useSession } from "next-auth/react";
 
 const MyBooking = () => {
   const { data } = useSession();
   const [bookingHistory, setBookingHistory] = useState([]);
-  useEffect(() => {
-    data && GetUserBookingHistory();
-  }, [data]);
 
-  /**
-   * Used to Get User Booking History
-   */
   const GetUserBookingHistory = () => {
     GlobalApi.GetUserBookingHistory(data.user.email).then((resp) => {
       console.log(resp);
       setBookingHistory(resp.bookings);
     });
   };
+
+  useEffect(() => {
+    if (data) {
+      GetUserBookingHistory();
+    }
+  }, [data]);
+
+  /**
+   * Used to Get User Booking History
+   */
 
   const filterData = (type) => {
     const result = bookingHistory.filter((item) =>

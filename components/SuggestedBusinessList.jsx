@@ -4,20 +4,22 @@ import { NotebookPen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import BookingSection from "./BookingSection";
+import BookingSection from "@/components/BookingSection";
 
 const SuggestedBusinessList = ({ business }) => {
   const [businessList, setBusinessList] = useState([]);
-
-  useEffect(() => {
-    business && getBusinessList();
-  }, [business]);
 
   const getBusinessList = () => {
     GlobalApi.getBusinessByCategory(business?.category?.name).then((resp) => {
       setBusinessList(resp?.businessLists);
     });
   };
+
+  useEffect(() => {
+    if (business) {
+      getBusinessList();
+    }
+  }, [business]);
 
   return (
     <div className="md:pl-10 ">

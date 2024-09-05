@@ -2,21 +2,13 @@
 import GlobalApi from "@/app/services/GlobalApi";
 import { signIn, useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import BusinessInfo from "../componentss/BusinessInfo";
-import SuggestedBusinessList from "../componentss/SuggestedBusinessList";
-import BusinessDescription from "../componentss/BusinessDescription";
+import BusinessInfo from "@/components/BusinessInfo";
+import SuggestedBusinessList from "@/components/SuggestedBusinessList";
+import BusinessDescription from "@/components/BusinessDescription";
 
 const BusinessDetail = ({ params }) => {
   const { data, status } = useSession();
   const [business, setBusiness] = useState([]);
-
-  useEffect(() => {
-    params && getBusinessById();
-  }, [params]);
-
-  useEffect(() => {
-    checkUserAuth();
-  }, []);
 
   const getBusinessById = () => {
     GlobalApi.getBusinessById(params.businessId).then((resp) => {
@@ -24,15 +16,24 @@ const BusinessDetail = ({ params }) => {
     });
   };
 
+  useEffect(() => {
+    if (params) {
+      getBusinessById();
+    }
+  }, [params]);
+
   const checkUserAuth = () => {
     if (status == "loading") {
       return <p>Loading...</p>;
     }
-
     if (status == "unauthenticated") {
       signIn("descope");
     }
   };
+
+  useEffect(() => {
+    checkUserAuth();
+  }, []);
 
   return (
     status == "authenticated" &&

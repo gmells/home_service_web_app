@@ -27,14 +27,6 @@ const BookingSection = ({ children, business }) => {
     getTime();
   }, []);
 
-  useEffect(() => {
-    date && BusinessBookedSlot();
-  }, [date]);
-
-  /*
-   * Get Selected Date Business Booked Slot
-   */
-
   const BusinessBookedSlot = () => {
     GlobalApi.BusinessBookedSlot(
       business.id,
@@ -44,6 +36,16 @@ const BookingSection = ({ children, business }) => {
       setBookedSlot(resp.bookings);
     });
   };
+
+  useEffect(() => {
+    if (date) {
+      BusinessBookedSlot();
+    }
+  }, [date]);
+
+  /*
+   * Get Selected Date Business Booked Slot
+   */
 
   const getTime = () => {
     const timeList = [];
