@@ -2,17 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, Clock, MapPin, User } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+
 import GlobalApi from "@/app/services/GlobalApi";
 import { toast } from "sonner";
 
@@ -37,10 +27,10 @@ function BookingHistoryList({ bookingHistory, type }) {
           className="border 
           rounded-lg p-4 mb-5"
         >
-          <div key={index} className="flex gap-4  ">
+          <div key={index} className="flex gap-4 ">
             {booking?.businessList?.name && (
               <Image
-                src={booking?.businessList?.images[0]?.url}
+                src={booking?.businessList?.image[0]?.url}
                 alt="image"
                 width={120}
                 height={120}
@@ -68,29 +58,6 @@ function BookingHistoryList({ bookingHistory, type }) {
               </h2>
             </div>
           </div>
-
-          {/* <AlertDialog>
-  <AlertDialogTrigger asChild>
-  <Button
-          variant="outline"
-             className="mt-5 w-full border-red-300 ">Cancel Appointment</Button>
-  </AlertDialogTrigger>
-  <AlertDialogContent>
-    <AlertDialogHeader>
-      <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-      <AlertDialogDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
-      </AlertDialogDescription>
-    </AlertDialogHeader>
-    <AlertDialogFooter>
-      <AlertDialogCancel>Cancel</AlertDialogCancel>
-      <AlertDialogAction
-      onClick={()=>cancelAppointment(booking)}
-      >Continue</AlertDialogAction>
-    </AlertDialogFooter>
-  </AlertDialogContent>
-</AlertDialog> */}
         </div>
       ))}
     </div>
