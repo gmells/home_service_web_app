@@ -2,9 +2,9 @@
 import GlobalApi from "@/app/services/GlobalApi";
 import { signIn, useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import BusinessInfo from "../components/BusinessInfo";
-import SuggestedBusinessList from "../components/SuggestedBusinessList";
-import BusinessDescription from "../components/BusinessDescription";
+import BusinessInfo from "../componentss/BusinessInfo";
+import SuggestedBusinessList from "../componentss/SuggestedBusinessList";
+import BusinessDescription from "../componentss/BusinessDescription";
 
 const BusinessDetail = ({ params }) => {
   const { data, status } = useSession();
