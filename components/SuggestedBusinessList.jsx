@@ -4,10 +4,21 @@ import { NotebookPen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import BookingSection from "@/components/BookingSection";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import BookingSection from "./BookingSection";
 
-const SuggestedBusinessList = ({ business }) => {
+function SuggestedBusinessList({ business }) {
   const [businessList, setBusinessList] = useState([]);
+  useEffect(() => {
+    business && getBusinessList();
+  }, [business]);
 
   const getBusinessList = () => {
     GlobalApi.getBusinessByCategory(business?.category?.name).then((resp) => {
@@ -15,30 +26,33 @@ const SuggestedBusinessList = ({ business }) => {
     });
   };
 
-  useEffect(() => {
-    if (business) {
-      getBusinessList();
-    }
-  }, [business]);
-
   return (
-    <div className="md:pl-10 ">
+    <div className="md:pl-10">
       <BookingSection business={business}>
-        <Button className="flex gap-2 md:w-full min-w-[150px] ">
+        <Button className="flex gap-2 w-full">
           <NotebookPen />
           Book Appointment
         </Button>
       </BookingSection>
-      <div className=" hidden md:block">
-        <h2 className="font-bold text-lg mt-3 mb-3">Similar Business</h2>
+      <div className="hidden md:block">
+        <h2
+          className="font-bold 
+      text-lg mt-3 mb-3
+      
+      "
+        >
+          Similar Business
+        </h2>
         <div className="">
           {businessList &&
             businessList.map((business, index) => (
               <Link
-                href={`/details/` + business.id}
                 key={index}
-                className="flex gap-2 mb-4 hover:border border-primary rounded-lg p-2
-                cursor-pointer hover:shadow-md "
+                href={"/details/" + business.id}
+                className="flex gap-2 mb-4
+          hover:border rounded-lg p-2
+          cursor-pointer hover:shadow-md
+           border-primary"
               >
                 <Image
                   src={business?.image[0].url}
@@ -47,8 +61,7 @@ const SuggestedBusinessList = ({ business }) => {
                   height={80}
                   className="rounded-lg object-cover h-[100px]"
                 />
-                {/*oo*/}
-                <div>
+                <div className="">
                   <h2 className="font-bold">{business.name}</h2>
                   <h2 className="text-primary">{business.contactPerson}</h2>
                   <h2 className="text-gray-400">{business.address}</h2>
@@ -59,6 +72,6 @@ const SuggestedBusinessList = ({ business }) => {
       </div>
     </div>
   );
-};
+}
 
 export default SuggestedBusinessList;
