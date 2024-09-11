@@ -5,7 +5,7 @@ const MASTER_URL =
   process.env.NEXT_PUBLIC_MASTER_URL_KEY +
   "/master";
 
-const getCategory = async () => {
+export const getCategory = async () => {
   const query = gql`
     query Category {
       categories {
@@ -25,7 +25,7 @@ const getCategory = async () => {
   return result;
 };
 
-const getAllBusinessList = async () => {
+export const getAllBusinessList = async () => {
   const query = gql`
     query BusinessLists {
       businessLists {
@@ -49,7 +49,7 @@ const getAllBusinessList = async () => {
   return result;
 };
 
-const getBusinessByCategory = async (category) => {
+export const getBusinessByCategory = async (category) => {
   const query =
     gql`
     query MyQuery {
@@ -76,7 +76,7 @@ const getBusinessByCategory = async (category) => {
   return result;
 };
 
-const getBusinessById = async (id) => {
+export const getBusinessById = async (id) => {
   const query =
     gql`
     query GetBusinessById {
@@ -103,7 +103,7 @@ const getBusinessById = async (id) => {
   return result;
 };
 
-const createNewBooking = async (
+export const createNewBooking = async (
   businessId,
   date,
   time,
@@ -146,7 +146,7 @@ const createNewBooking = async (
   return result;
 };
 
-const BusinessBookedSlot = async (businessId, date) => {
+export const BusinessBookedSlot = async (businessId, date) => {
   const query =
     gql`
     query BusinessBookedSlot {
@@ -165,7 +165,7 @@ const BusinessBookedSlot = async (businessId, date) => {
   return result;
 };
 
-const GetUserBookingHistory = async (userEmail) => {
+export const GetUserBookingHistory = async (userEmail) => {
   const query =
     gql`
     query GetUserBookingHistory {
@@ -191,12 +191,12 @@ const GetUserBookingHistory = async (userEmail) => {
   return result;
 };
 
-export default {
-  getCategory,
-  getAllBusinessList,
-  getBusinessByCategory,
-  getBusinessById,
-  createNewBooking,
-  BusinessBookedSlot,
-  GetUserBookingHistory,
-};
+// export default {
+//   getCategory,
+//   getAllBusinessList,
+//   getBusinessByCategory,
+//   getBusinessById,
+//   createNewBooking,
+//   BusinessBookedSlot,
+//   GetUserBookingHistory,
+// };

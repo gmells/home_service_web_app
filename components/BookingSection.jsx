@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from "react";
 import {
   Sheet,
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
-import GlobalApi from "@/app/services/GlobalApi";
+import { BusinessBookedSlot, createNewBooking } from "@/app/services/GlobalApi";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import moment from "moment";
@@ -27,21 +28,20 @@ const BookingSection = ({ children, business }) => {
     getTime();
   }, []);
 
-  const BusinessBookedSlot = () => {
-    GlobalApi.BusinessBookedSlot(
-      business.id,
-      moment(date).format("DD-MMM-yyyy")
-    ).then((resp) => {
-      console.log(resp);
-      setBookedSlot(resp.bookings);
-    });
-  };
-
   useEffect(() => {
     if (date) {
-      BusinessBookedSlot();
+      const BBusinessBookedSlot = () => {
+        BusinessBookedSlot(
+          business.id,
+          moment(date).format("DD-MMM-yyyy")
+        ).then((resp) => {
+          console.log(resp);
+          setBookedSlot(resp.bookings);
+        });
+      };
+      BBusinessBookedSlot();
     }
-  }, [date]);
+  }, [date, business.id]);
 
   /*
    * Get Selected Date Business Booked Slot
@@ -70,7 +70,7 @@ const BookingSection = ({ children, business }) => {
   };
 
   const saveBooking = () => {
-    GlobalApi.createNewBooking(
+    createNewBooking(
       business.id,
       moment(date).format("DD-MMM-yyyy"),
       selectedTime,

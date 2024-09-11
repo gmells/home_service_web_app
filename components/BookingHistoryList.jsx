@@ -3,22 +3,22 @@ import { Calendar, Clock, MapPin, User } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-import GlobalApi from "@/app/services/GlobalApi";
+// import {deleteBooking} from "@/app/services/GlobalApi";
 import { toast } from "sonner";
 
 function BookingHistoryList({ bookingHistory, type }) {
-  const cancelAppointment = (booking) => {
-    GlobalApi.deleteBooking(booking.id).then(
-      (resp) => {
-        if (resp) {
-          toast("Booking Delete Successfully!");
-        }
-      },
-      (e) => {
-        toast("Error while canceling booking!");
-      }
-    );
-  };
+  // const cancelAppointment = (booking) => {
+  //   deleteBooking(booking.id).then(
+  //     (resp) => {
+  //       if (resp) {
+  //         toast("Booking Delete Successfully!");
+  //       }
+  //     },
+  //     (e) => {
+  //       toast("Error while canceling booking!");
+  //     }
+  //   );
+  // };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">

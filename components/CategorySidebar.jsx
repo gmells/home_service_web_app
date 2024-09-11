@@ -1,5 +1,5 @@
 "use client";
-import GlobalApi from "@/app/services/GlobalApi";
+import { getCategory } from "@/app/services/GlobalApi";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -21,7 +21,7 @@ const CategorySidebar = () => {
   // Used to get all Category List
 
   const getCategoryList = () => {
-    GlobalApi.getCategory().then((resp) => {
+    getCategory().then((resp) => {
       console.log(resp);
       setCategoryList(resp.categories);
     });

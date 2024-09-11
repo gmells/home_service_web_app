@@ -1,4 +1,5 @@
-import GlobalApi from "@/app/services/GlobalApi";
+"use client";
+import { getBusinessByCategory } from "@/app/services/GlobalApi";
 import { Button } from "@/components/ui/button";
 import { NotebookPen } from "lucide-react";
 import Image from "next/image";
@@ -16,15 +17,17 @@ import BookingSection from "./BookingSection";
 
 function SuggestedBusinessList({ business }) {
   const [businessList, setBusinessList] = useState([]);
-  useEffect(() => {
-    business && getBusinessList();
-  }, [business]);
 
-  const getBusinessList = () => {
-    GlobalApi.getBusinessByCategory(business?.category?.name).then((resp) => {
-      setBusinessList(resp?.businessLists);
-    });
-  };
+  useEffect(() => {
+    const getBusinessList = () => {
+      getBusinessByCategory(business?.category?.name).then((resp) => {
+        setBusinessList(resp?.businessLists);
+      });
+    };
+    if (business) {
+      getBusinessList();
+    }
+  }, [business]);
 
   return (
     <div className="md:pl-10">
